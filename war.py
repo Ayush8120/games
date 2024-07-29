@@ -1,4 +1,7 @@
 import random, logging
+'''
+Recording The Gameplay
+'''
 logging.basicConfig(level=logging.DEBUG,
             filename="app.log",
             encoding="utf-8",
@@ -7,6 +10,9 @@ logging.basicConfig(level=logging.DEBUG,
             style="{",
             datefmt="%Y-%m-%d %H:%M",
         )
+def getRounds():
+    num_rounds = input('How many rounds do you want to simulate: ')
+    return (num_rounds)
 
 class Card():
     '''
@@ -17,7 +23,7 @@ class Card():
         self.suit = suit
 
     def toString(self):
-        return self.value + 'of' + self.suit
+        return self.value + ' of ' + self.suit
     
     def getRank(self):
         ranks = {"Ace":14,"King":13,"Queen":12,"Jack":11,"10":10,"9":9,"8":8,"7":7,"6":6,"5":5,"4":4,"3":3,"2":2}
@@ -43,9 +49,23 @@ class Deck():
 
     
 if __name__ == '__main__':
-    max_round = int(input('How many rounds do you want to simulate: '))
-    show = input('Do you want too record the gameplay? (T/F)')
-    SHOW_CARDS = 1 if show.lower() == 't' else 0 if show.lower() == 'f' else -1   
+    while True:
+        try:
+            max_round = int(getRounds())
+            break
+        except:
+            print("ValueError Exception")
+            continue
+    while True:
+        try:
+            show = input('Do you want too record the gameplay? (T/F)')
+            SHOW_CARDS = 1 if show.lower() == 't' else 0 if show.lower() == 'f' else -1
+            if SHOW_CARDS == -1: raise ValueError
+            break
+        except:
+            print("ValueError Exception")
+            continue
+
     deck = Deck()
     deck.shuffle()
     fullDeck = deck.deck
@@ -130,4 +150,3 @@ if __name__ == '__main__':
         winner = 1 if scorePlayer1 > scorePlayer2 else 2 if scorePlayer1 < scorePlayer2 else 'DRAW'
 
     logging.info(f'Winner : Player {winner}')
-                
