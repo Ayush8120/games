@@ -1,24 +1,10 @@
-import random, copy, time
-
-'''
-countdown creation
-'''
-def countdown(shared_flag, t): 
-    print('Try to do 3 within 2 minutes time')
-    while t: 
-        mins, secs = divmod(t, 60) 
-        timer = '                                                         {:02d}:{:02d}'.format(mins, secs) 
-        print(timer, end="\r") 
-        time.sleep(10) 
-        t -= 10
-    shared_flag.value = -1
-    
-      
+import random, copy
+   
 '''
 fetching movie names
 '''
 def give_movie(count=3):
-    file1 = open('movie_names.txt', 'r')
+    file1 = open('./hangman/movie_names.txt', 'r')
     Lines = file1.readlines()
     pool = []
     for l in Lines:
