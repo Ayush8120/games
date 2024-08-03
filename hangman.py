@@ -44,6 +44,7 @@ def play(rounds:int, movieList:list, maskList:list):
             guess = input('Enter your Guess : ')
             assert ord(guess.lower()) >=97 and ord(guess.lower()) <= 122 
             guess_hist.append(guess)
+            print(f'Guess history : {set(guess_hist)}\n')
             if '_' in maskList[i]:
                 if guess.lower() in movie:
                     temp = list(maskList[i].replace(" ",""))
